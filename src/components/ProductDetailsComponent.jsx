@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import ProductService from "../services/ProductService";
+import SideBarComponent from "./SideBarComponent";
 
 class ProductDetailsComponent extends Component {
     constructor(props) {
@@ -25,7 +26,8 @@ class ProductDetailsComponent extends Component {
     }
     render() {
         return (
-            <div><br/>
+            <div>
+                <br/>
                 <div className="card">
                     <div className="card-header"><h3>Product Page</h3></div>
                     <div className="card-body">

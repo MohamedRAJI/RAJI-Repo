@@ -4,26 +4,28 @@ import * as AiIcons from 'react-icons/ai';
 import { Link } from 'react-router-dom';
 import { IconContext } from 'react-icons';
 import MenuItemsService from "../services/MenuItemsService";
+import { withRouter } from "react-router";
 
 class SideBarComponent  extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            codeBank: this.props.match.params.codeBank,
+            //bank:this.props.data.bank,
             items: [],
             sidebar:false
         }
    }
     componentDidMount() {
-        MenuItemsService.getItems(this.state.codeBank).then((res)=> {
+        MenuItemsService.getItems(this.props.data).then((res)=> {
             this.setState({items: res.data});
         });
 
     }
 
     render() {
+        console.log("code bank "+ this.state.bank)
         return (
-            <IconContext.Provider value={{color: '#fff'}}>
+            <IconContext.Provider value={{color: '#fff'}} >
                 <div className='navbar'>
                     <Link to='#' className='menu-bars'>
                         <FaIcons.FaBars onClick={() => this.setState({ sidebar: !this.state.sidebar })}/>
@@ -43,7 +45,7 @@ class SideBarComponent  extends Component {
                                 item => {
                                     if (item.value === 'y') {
                                         return <li key={item.id}>
-                                            <Link>
+                                            <Link to="#">
                                                 <span>{item.libelle}</span>
                                             </Link>
                                         </li>

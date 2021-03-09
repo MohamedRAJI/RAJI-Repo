@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
 import ProductService from "../services/ProductService";
-
+import SideBarComponent from "./SideBarComponent";
 class ListProductsComponent extends Component {
     constructor(props) {
         super(props);
         this.state={
+            bank:this.props.match.params.bank,
             products:[]
         }
         this.addProduct=this.addProduct.bind(this);
@@ -12,7 +13,7 @@ class ListProductsComponent extends Component {
         this.deleteProduct=this.deleteProduct.bind(this);
     }
     componentDidMount() {
-        ProductService.getProducts().then((res)=>{
+        ProductService.getProducts(this.state.bank).then((res)=>{
            this.setState({products:res.data}) ;
         });
     }
@@ -32,7 +33,8 @@ class ListProductsComponent extends Component {
     }
     render() {
         return (
-            <div>
+            <div className="fill-window">
+                <SideBarComponent data={this.state.bank}/>
                 <h2 className="text-center">Products List</h2>
                 <div className="row">
                    <button className="btn btn-primary"  onClick={this.addProduct} >Add Product</button>
